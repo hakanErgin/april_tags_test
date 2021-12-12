@@ -1,0 +1,33 @@
+FROM python:3.9-slim-bullseye
+
+RUN apt-get update && apt-get -y install sudo && apt-get -y install cmake && sudo apt-get install -y build-essential
+
+RUN useradd -m docker && echo "docker:docker" | chpasswd && adduser docker sudo
+
+RUN apt-get install -y python3-opencv
+
+RUN pip install opencv-python
+
+ENV LD_LIBRARY_PATH "/usr/local/app/lib:${LD_LIBRARY_PATH}"
+
+USER docker
+
+WORKDIR /usr/local/app
+
+# COPY requirements.txt ./
+# RUN pip install --no-cache-dir -r requirements.txt
+
+COPY . .
+
+WORKDIR /usr/local/app/apriltag 
+
+USER root
+
+RUN cmake . && sudo make install
+# RUN make && sudo make install
+
+USER docker
+
+WORKDIR /usr/local/app
+
+CMD [ "python", "./test.py" ]
