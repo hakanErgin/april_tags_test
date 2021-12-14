@@ -4,8 +4,10 @@ from apriltag import apriltag
 
 imagepath = 'bots.jpg'
 image = cv2.imread(imagepath, cv2.IMREAD_GRAYSCALE)
-detector = apriltag("tagStandard41h12")
+detector = apriltag("tag36h11")
 
 detections = detector.detect(image)
+print("detections")
 
-print(detections)
+cv2.imshow('', image)
+cv2.waitKey()

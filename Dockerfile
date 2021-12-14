@@ -16,7 +16,7 @@ RUN pip install --trusted-host pypi.python.org --upgrade pip \
     && git clone https://github.com/AprilRobotics/apriltag.git /home/apriltag \
     && cd /home/apriltag \
     # fix missing site-packages in /root/.local/lib/python3.7/
-    && ln -s /usr/local /root/.local \
+    # && ln -s /usr/local /root/.local \
     && cmake . \
     && make install
 
