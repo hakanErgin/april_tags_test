@@ -6,6 +6,7 @@ FROM jjanzic/docker-python3-opencv:opencv-4.0.0
 # fix "ImportError: libapriltag.so.3: cannot open shared object file: No such file or directory"
 # https://github.com/AprilRobotics/apriltag/issues/46
 ENV LD_LIBRARY_PATH "/usr/local/lib:${LD_LIBRARY_PATH}"
+# ENV DISPLAY "172.30.48.1:0.0"
 
 WORKDIR /app
 COPY . /app
